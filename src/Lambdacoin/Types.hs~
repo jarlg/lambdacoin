@@ -1,0 +1,39 @@
+{-# LANGUAGE DeriveGeneric #-} 
+
+module Haskoin.Types where
+
+import Crypto.Hash
+import Data.Time.Clock.POSIX
+import GHC.Generics
+
+
+type Account = String
+
+data Transaction = Transaction
+  { _from :: Account
+  , _to :: Account
+  , _amount :: Integer
+  } deriving (Eq, Show, Generic)
+
+type HaskoinHash = Digest SHA1
+type Difficulty = Integer
+
+data BlockHeader = BlockHeader
+  { _miner :: Account
+  , _parentHash :: HaskoinHash
+  , _nonce :: Integer
+  , _time :: POSIXTime
+  , _target :: Difficulty
+  } deriving (Eq, Show, Generic)
+
+data Blockchain = Genesis POSIXTime
+                | Block BlockHeader [Transaction] Blockchain
+                deriving (Generic, Show, Eq)
+
+-- read: after performing some IO, I get a list of transactions
+type TransactionPool = IO [Transaction]
+
+data Msg = QueryBC
+         | NewBlock BlockHeader [Transaction] 
+         | RespBC Blockchain
+         deriving (Show, Generic, Eq)

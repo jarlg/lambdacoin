@@ -1,2 +1,7 @@
 shell.nix
 notes
+*#*
+dist/
+notes.org
+*~
+balances.txt
