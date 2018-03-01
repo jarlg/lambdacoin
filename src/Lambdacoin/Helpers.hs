@@ -78,7 +78,6 @@ transactions :: Blockchain -> [Transaction]
 transactions (Genesis _) = []
 transactions (Block _ txns parent) = txns ++ transactions parent
 
-
 -- validates txns; not e.g. blockheaders
 filterValidTx :: Blockchain -> [Transaction] -> [Transaction]
 filterValidTx bc txns =

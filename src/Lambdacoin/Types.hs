@@ -30,9 +30,6 @@ data Blockchain = Genesis POSIXTime
                 | Block BlockHeader [Transaction] Blockchain
                 deriving (Generic, Show, Eq)
 
--- read: after performing some IO, I get a list of transactions
-type TransactionPool = IO [Transaction]
-
 data Msg = QueryBC
          | NewBlock BlockHeader [Transaction] 
          | RespBC Blockchain
