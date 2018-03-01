@@ -21,7 +21,7 @@ import System.IO (hSetBuffering, hSetBinaryMode, BufferMode(NoBuffering))
 miningReward = 10 :: Integer
 globalTransactionLimit = 1000 :: Int
 
-genesisDifficulty = 0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF :: Difficulty
+genesisDifficulty = 0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF :: Difficulty
 
 -- epoch is # of blocks before difficulty is recalculated
 epochSize = 16 :: Int-- 2m40s at 10s/block
@@ -60,7 +60,7 @@ balances bc = M.fromListWith (+) $ rewards ++ credits
     credits = foldl transfer [] (transactions bc)
       where
         transfer :: [(Account, Integer)] -> Transaction -> [(Account, Integer)]
-        transfer xs (Transaction to from amount) = (to, amount) : (from, -amount) : xs
+        transfer xs (Transaction from to amount) = (to, amount) : (from, -amount) : xs
 
 times :: Blockchain -> [POSIXTime]
 times (Genesis t) = [t]

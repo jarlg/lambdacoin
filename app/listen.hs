@@ -37,6 +37,9 @@ server handle bc = do
           putStrLn $ _miner header <> " found a new block!"
           writeFile "balances.txt" . show $ H.balances bc'
           return bc'
+    handleMsg (AnnounceTX (Transaction from to amount)) bc = do
+      putStrLn $ from <> " sends " <> show amount <> " to " <> to
+      return bc
     handleMsg _ bc = return bc
     
 main :: IO ()

@@ -36,4 +36,5 @@ type TransactionPool = IO [Transaction]
 data Msg = QueryBC
          | NewBlock BlockHeader [Transaction] 
          | RespBC Blockchain
+         | AnnounceTX Transaction
          deriving (Show, Generic, Eq)

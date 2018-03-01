@@ -23,10 +23,10 @@ library
   -- other-modules:       
   -- other-extensions:    
   build-depends:       base, cryptonite, binary, time, async, bytestring, containers,
-                       memory, protolude, network
+                       memory, network, protolude
   -- hs-source-dirs:      
   default-language:    Haskell2010
-  ghc-options:         -O2 -Wall
+  ghc-options:         -O2
 
 executable mine
   hs-source-dirs:      app
@@ -38,8 +38,14 @@ executable mine
 executable listen
   hs-source-dirs:      app
   main-is:             listen.hs
-  build-depends:       base, network, lambdacoin, bytestring, binary, protolude,
-                       cryptonite
+  build-depends:       base, network, lambdacoin, bytestring, binary, cryptonite,
+                       protolude
+  default-language:    Haskell2010
+
+executable transfer
+  hs-source-dirs:      app
+  main-is:             transfer.hs
+  build-depends:       base, network, bytestring, lambdacoin, binary
   default-language:    Haskell2010
 
 executable netcat
